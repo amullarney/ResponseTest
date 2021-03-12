@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Gizmo API
+  description: A simple API to test OpenAPI generation
+
+servers:
+  - url: https://gizmo.io/
+
+
+paths:
+  /$connect:
+    get:
+      description: get first response
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string       
+  /queryfirst:
+    get:
+      description: get first response
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+  /querysecond:
+    get:
+      description: get second response
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: Invalid request
+
