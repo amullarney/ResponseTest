@@ -1,0 +1,137 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Sample API
+  description: A simple API to test OpenAPI generation
+
+servers:
+  - url: https://simple.io/
+
+
+paths:
+  /$connect:
+    get:
+      operationId: RegisterClient
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+  /queryfirst:
+    get:
+      description: respond with text
+      operationId: QueryOne
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+  /querysecond/{question}:
+    get:
+      description: try path parameter
+      operationId: QueryTwo
+      parameters:
+        - in: path
+          name: question
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+  /querythird:
+    get:
+      description: try query parameter
+      operationId: QueryThird
+      parameters:
+        - in: query
+          name: question
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+  /getclient:
+    post:
+      description: try for connectionId
+      operationId: GetClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Clientobject'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: string
+  /queryobj:
+    post:
+      description: try data
+      operationId: PostQueryObj
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Containerobject'
+      responses:
+        '200':
+          description: success
+          content:
+            application/json:
+              schema:
+                type: string
+        '400':
+          description: Invalid request
+components:
+  schemas:
+    Dataobject:
+      type: object
+      properties:
+        action:
+          type: string
+        field1:
+          type: string
+        field2:
+          type: string
+    Clientdata:
+      type: object
+      properties:
+        clientid:
+          type: string
+    Containerobject:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Dataobject'
+        client:
+          $ref: '#/components/schemas/Clientdata'
+    Clientobject:
+      properties:
+        action:
+          type: string
+        clientid:
+          type: string
+
+
