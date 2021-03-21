@@ -13,7 +13,13 @@ import org.springframework.http.ResponseEntity;
 public class GetclientApiController implements GetclientApi {
 
     private final NativeWebRequest request;
-
+    
+    private static Clientobject lastclient;
+    
+    public static Clientobject GetLastClient() {
+        return lastclient;
+    }
+    
     @org.springframework.beans.factory.annotation.Autowired
     public GetclientApiController(NativeWebRequest request) {
         this.request = request;
@@ -25,6 +31,7 @@ public class GetclientApiController implements GetclientApi {
     }
 
     public ResponseEntity<String> getClient( Clientobject clientobject) {
+        lastclient = clientobject;
         if ( null != clientobject )
            System.out.printf("Client is %s\n", clientobject.getClientid() );
         else

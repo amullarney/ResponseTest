@@ -30,10 +30,15 @@ public class QueryobjApiController implements QueryobjApi {
     public ResponseEntity<String> postQueryObj(Containerobject containerobject) {
         Dataobject dataobject = containerobject.getData();
         Clientdata client = containerobject.getClient();
-        System.out.printf( "Data\n" );
-        System.out.printf( "action %s\n" , dataobject.getAction() );
-        System.out.printf( "field1 %s\n" , dataobject.getField1() );
-        System.out.printf( "field2 %s\n" , dataobject.getField2() );
-        return ResponseEntity.ok("Data received from client: " + client.getClientid() );
+        System.out.printf( "Data received\n" );
+        if ( dataobject != null ) {
+          System.out.printf( "action %s\n" , dataobject.getAction() );
+          System.out.printf( "field1 %s\n" , dataobject.getField1() );
+          System.out.printf( "field2 %s\n" , dataobject.getField2() );
+        }
+        if ( client != null )
+          return ResponseEntity.ok("Data received from client: " + client.getClientid() );
+        else
+          return ResponseEntity.ok("Data failed\n" );
     }
 }
